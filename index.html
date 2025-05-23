@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vì Một Ngày Mai - Nền tảng kết nối tình nguyện viên vùng cao</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        secondary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        },
+                        earth: {
+                            50: '#faf5f0',
+                            100: '#f5ebe1',
+                            200: '#e9d5c4',
+                            300: '#ddbfa6',
+                            400: '#c49a78',
+                            500: '#b07b55',
+                            600: '#a06548',
+                            700: '#85523c',
+                            800: '#6d4535',
+                            900: '#5c3a2e',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "url('https://images.unsplash.com/photo-1527525443983-6e60c75fff46?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
+                        'texture': "url('data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23f3f4f6' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E')",
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .text-shadow-lg {
+                text-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+            }
+            .mask-image-bottom {
+                mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 80%, transparent 100%);
+                -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 80%, transparent 100%);
+            }
+            .custom-scrollbar::-webkit-scrollbar {
+                width: 6px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 10px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-thumb {
+                background: #888;
+                border-radius: 10px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 bg-gray-50 bg-texture">
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
+        <div class="relative w-24 h-24">
+            <div class="absolute top-0 left-0 w-full h-full border-4 border-gray-200 rounded-full"></div>
+            <div class="absolute top-0 left-0 w-full h-full border-4 border-t-primary-500 border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-primary-600 text-sm font-bold">VNM</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-40 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 rounded-full bg-primary-500 flex items-center justify-center text-white font-bold text-lg mr-2">
+                                VNM
+                            </div>
+                            <span class="text-primary-700 font-bold text-xl">Vì một ngày mai</span>
+                        </div>
+                    </div>
+                    <div class="hidden sm:ml-8 sm:flex sm:space-x-8 items-center">
+                        <a href="#" class="border-primary-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200">
+                            Trang chủ
+                        </a>
+                        <a href="#about" class="border-transparent text-gray-500 hover:text-primary-600 hover:border-primary-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200">
+                            Giới thiệu
+                        </a>
+                        <a href="#features" class="border-transparent text-gray-500 hover:text-primary-600 hover:border-primary-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200">
+                            Tính năng
+                        </a>
+                        <a href="#testimonials" class="border-transparent text-gray-500 hover:text-primary-600 hover:border-primary-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200">
+                            Đánh giá
+                        </a>
+                        <a href="#community" class="border-transparent text-gray-500 hover:text-primary-600 hover:border-primary-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors duration-200">
+                            Cộng đồng
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
+                    <button class="bg-white border border-primary-500 text-primary-600 hover:bg-primary-50 px-4 py-2 rounded-full text-sm font-medium transition duration-150 ease-in-out">
+                        Đăng nhập
+                    </button>
+                    <button class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-full text-sm font-medium transition duration-150 ease-in-out shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                        Đăng ký
+                    </button>
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500">
+                        <span class="sr-only">Mở menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div id="mobile-menu" class="sm:hidden hidden">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="#" class="bg-primary-50 border-primary-500 text-primary-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+                    Trang chủ
+                </a>
+                <a href="#about" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-primary-300 hover:text-primary-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+                    Giới thiệu
+                </a>
+                <a href="#features" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-primary-300 hover:text-primary-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+                    Tính năng
+                </a>
+                <a href="#testimonials" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-primary-300 hover:text-primary-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+                    Đánh giá
+                </a>
+                <a href="#community" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-primary-300 hover:text-primary-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+                    Cộng đồng
+                </a>
+            </div>
+            <div class="pt-4 pb-3 border-t border-gray-200">
+                <div class="flex items-center px-4 space-x-3">
+                    <button class="flex-1 bg-white border border-primary-500 text-primary-600 hover:bg-primary-50 px-4 py-2 rounded-full text-sm font-medium transition duration-150 ease-in-out">
+                        Đăng nhập
+                    </button>
+                    <button class="flex-1 bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-full text-sm font-medium transition duration-150 ease-in-out">
+                        Đăng ký
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-24 pb-32 overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50">
+        <div class="absolute inset-0 bg-hero-pattern opacity-10 mix-blend-overlay"></div>
+        <div class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent"></div>
+        
+        <!-- Decorative Elements -->
+        <div class="absolute top-1/4 right-0 w-64 h-64 bg-primary-200 rounded-full filter blur-3xl opacity-20 animate-pulse"></div>
+        <div class="absolute bottom-1/4 left-0 w-64 h-64 bg-secondary-200 rounded-full filter blur-3xl opacity-20 animate-pulse" style="animation-delay: 1s;"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="lg:flex lg:items-center lg:justify-between">
+                <div class="lg:w-1/2" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="inline-block px-3 py-1 rounded-full bg-primary-100 text-primary-800 text-sm font-semibold mb-6 shadow-sm">
+                        Nền tảng kết nối tình nguyện
+                    </div>
+                    <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+                        <span class="block text-primary-700 text-shadow-lg">Vì một ngày mai</span>
+                        <span class="block text-secondary-700 mt-2 text-shadow">Nơi kết nối tình nguyện viên và các hành trình gieo chữ vùng cao</span>
+                    </h1>
+                    <p class="mt-6 text-xl text-gray-600 max-w-3xl">
+                        Nền tảng tổng hợp thông tin tuyển tình nguyện viên dạy học vùng cao với bộ lọc thông minh, minh bạch, rõ ràng, dễ sử dụng.
+                    </p>
+                    <p class="mt-3 text-lg text-gray-600 max-w-3xl italic">
+                        Gieo chữ nơi cao – lưu dấu từng bước chân, từng kỷ niệm. Nơi mỗi hành trình tình nguyện không chỉ là sẻ chia, mà còn là kết nối và trưởng thành.
+                    </p>
+                    <div class="mt-8 flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+                        <a href="#" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-primary-600 hover:bg-primary-700 transition duration-300 ease-in-out shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                            <i class="fas fa-search mr-2"></i> Tìm cơ hội ngay
+                        </a>
+                        <a href="#" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-primary-700 bg-white hover:bg-gray-50 transition duration-300 ease-in-out shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                            <i class="fas fa-bell mr-2"></i> Đăng ký nhận thông báo
+                        </a>
+                        <a href="#" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-secondary-700 bg-white hover:bg-gray-50 transition duration-300 ease-in-out shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                            <i class="fas fa-user-plus mr-2"></i> Đăng tìm TNV
+                        </a>
+                    </div>
+                </div>
+                <div class="mt-10 lg:mt-0 lg:w-1/2 relative" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="relative">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+                        <img class="relative h-96 w-full object-cover rounded-lg shadow-2xl" src="https://images.unsplash.com/photo-1544476915-ed1370594142?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Tình nguyện viên dạy học vùng cao">
+                    </div>
+                    
+                    <!-- Floating Elements -->
+                    <div class="absolute -bottom-6 -left-6 bg-white rounded-lg shadow-xl p-4 w-48 transform rotate-3 animate-float">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-600">
+                                <i class="fas fa-mountain"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-xs font-medium text-gray-500">Đã có</p>
+                                <p class="text-lg font-bold text-gray-800">120+ chương trình</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute -top-6 -right-6 bg-white rounded-lg shadow-xl p-4 w-48 transform -rotate-3 animate-float-delayed">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 rounded-full bg-secondary-100 flex items-center justify-center text-secondary-600">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-xs font-medium text-gray-500">Đã kết nối</p>
+                                <p class="text-lg font-bold text-gray-800">1500+ TNV</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Wave Separator -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+            <svg class="relative block w-full h-12 sm:h-16" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-white"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:flex lg:items-center lg:justify-between">
+                <div class="lg:w-2/5" data-aos="fade-right" data-aos-duration="800">
+                    <div class="relative">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-primary-500 to-earth-500 rounded-lg blur opacity-20"></div>
+                        <div class="relative bg-white p-2 rounded-lg shadow-xl">
+                            <img class="h-80 w-full object-cover rounded-lg" src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Tình nguyện viên dạy học">
+                            
+                            <!-- Decorative elements -->
+                            <div class="absolute -bottom-4 -right-4 h-24 w-24 bg-primary-100 rounded-lg transform rotate-6 z-0"></div>
+                            <div class="absolute -top-4 -left-4 h-16 w-16 bg-earth-100 rounded-lg transform -rotate-6 z-0"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="mt-12 grid grid-cols-2 gap-4">
+                        <div class="bg-gray-50 rounded-lg p-4 shadow-md transform hover:scale-105 transition duration-300">
+                            <div class="text-3xl font-bold text-primary-600">63+</div>
+                            <div class="text-sm text-gray-600">Tỉnh thành</div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4 shadow-md transform hover:scale-105 transition duration-300">
+                            <div class="text-3xl font-bold text-secondary-600">200+</div>
+                            <div class="text-sm text-gray-600">Tổ chức đối tác</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-10 lg:mt-0 lg:w-3/5 lg:pl-16" data-aos="fade-left" data-aos-duration="800" data-aos-delay="100">
+                    <div class="inline-block px-3 py-1 rounded-full bg-earth-100 text-earth-800 text-sm font-semibold mb-4">
+                        Sứ mệnh của chúng tôi
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                        Gieo chữ khó – không chỉ vì núi cao
+                    </h2>
+                    <div class="mt-6 text-lg text-gray-600 space-y-4">
+                        <p>
+                            Dạy học tình nguyện nơi vùng cao luôn là một mong muốn đẹp của rất nhiều người trẻ. Thế nhưng, giữa vô vàn thông tin trôi nổi, thiếu minh bạch và phân tán, việc tìm được một hành trình phù hợp lại chẳng hề dễ dàng.
+                        </p>
+                        <p>
+                            Có người bỏ lỡ vì không biết đến chương trình kịp lúc, có người hoang mang vì không rõ yêu cầu – quyền lợi, lại có người từng thất vọng vì thông tin không đúng như kỳ vọng.
+                        </p>
+                        <p class="font-medium text-primary-700">
+                            Chúng tôi ra đời để lấp đầy khoảng trống ấy – tạo nên một chiếc cầu nối an toàn và tin cậy, nơi mọi hành trình được tập hợp, sắp xếp khoa học, rõ ràng và đầy đủ, giúp bạn không chỉ tìm thấy cơ hội, mà còn tìm thấy chính mình trong từng chuyến đi ý nghĩa.
+                        </p>
+                    </div>
+                    
+                    <!-- CTA Button -->
+                    <div class="mt-8">
+                        <a href="#" class="inline-flex items-center text-primary-600 font-medium hover:text-primary-800 transition duration-300">
+                            Tìm hiểu thêm về chúng tôi
+                            <svg class="ml-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gradient-to-br from-gray-50 to-primary-50 relative">
+        <!-- Decorative Elements -->
+        <div class="absolute top-0 left-0 w-full overflow-hidden leading-none transform rotate-180">
+            <svg class="relative block w-full h-12 sm:h-16" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-white"></path>
+            </svg>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center" data-aos="fade-up" data-aos-duration="800">
+                <div class="inline-block px-3 py-1 rounded-full bg-primary-100 text-primary-800 text-sm font-semibold mb-4">
+                    Tính năng nổi bật
+                </div>
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Thiết kế vì người dùng – thông minh, minh bạch, thân thiện
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
+                    Những tính năng nổi bật giúp bạn dễ dàng tìm kiếm và tham gia các chương trình tình nguyện phù hợp.
+                </p>
+            </div>
+
+            <div class="mt-16">
+                <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    <div class="bg-white rounded-xl shadow-xl p-8 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                        <div class="inline-flex items-center justify-center p-3 bg-primary-100 rounded-full text-primary-600 mb-4">
+                            <i class="fas fa-filter text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">Bộ lọc tiện lợi</h3>
+                        <p class="mt-4 text-base text-gray-600">
+                            Lọc theo địa điểm, thời gian, quyền lợi, yêu cầu, lĩnh vực và loại tổ chức – giúp bạn nhanh chóng tìm thấy chương trình phù hợp.
+                        </p>
+                        <a href="#" class="mt-6 inline-flex items-center text-primary-600 font-medium hover:text-primary-800 transition duration-300">
+                            Khám phá ngay
+                            <svg class="ml-2 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-xl p-8 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                        <div class="inline-flex items-center justify-center p-3 bg-primary-100 rounded-full text-primary-600 mb-4">
+                            <i class="fas fa-bookmark text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">Lưu chương trình yêu thích</h3>
+                        <p class="mt-4 text-base text-gray-600">
+                            Đánh dấu các cơ hội bạn quan tâm, những hành trình yêu thích, nhận thông báo khi có đợt mới hay xem lại bất cứ khi nào.
+                        </p>
+                        <a href="#" class="mt-6 inline-flex items-center text-primary-600 font-medium hover:text-primary-800 transition duration-300">
+                            Khám phá ngay
+                            <svg class="ml-2 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-xl p-8 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                        <div class="inline-flex items-center justify-center p-3 bg-primary-100 rounded-full text-primary-600 mb-4">
+                            <i class="fas fa-star text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">Đánh giá sau tham gia</h3>
+                        <p class="mt-4 text-base text-gray-600">
+                            Từ cộng đồng người thật việc thật – tăng độ tin cậy và truyền cảm hứng cho những người mới tham gia.
+                        </p>
+                        <a href="#" class="mt-6 inline-flex items-center text-primary-600 font-medium hover:text-primary-800 transition duration-300">
+                            Khám phá ngay
+                            <svg class="ml-2 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-xl p-8 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+                        <div class="inline-flex items-center justify-center p-3 bg-primary-100 rounded-full text-primary-600 mb-4">
+                            <i class="fas fa-question-circle text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">Hỏi – đáp nhanh</h3>
+                        <p class="mt-4 text-base text-gray-600">
+                            Giải đáp thắc mắc phổ biến một cách ngắn gọn, rõ ràng – như có người đồng hành bên bạn ngay từ đầu.
+                        </p>
+                        <a href="#" class="mt-6 inline-flex items-center text-primary-600 font-medium hover:text-primary-800 transition duration-300">
+                            Khám phá ngay
+                            <svg class="ml-2 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-xl p-8 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 md:col-span-2 lg:col-span-1" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
+                        <div class="inline-flex items-center justify-center p-3 bg-primary-100 rounded-full text-primary-600 mb-4">
+                            <i class="fas fa-users text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">Cộng đồng</h3>
+                        <p class="mt-4 text-base text-gray-600">
+                            Tham gia vào cộng đồng tình nguyện viên, chia sẻ kinh nghiệm, kết nối với những người có cùng đam mê, và nhận hỗ trợ từ các thành viên khác.
+                        </p>
+                        <a href="#" class="mt-6 inline-flex items-center text-primary-600 font-medium hover:text-primary-800 transition duration-300">
+                            Khám phá ngay
+                            <svg class="ml-2 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Wave Separator -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+            <svg class="relative block w-full h-12 sm:h-16" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="fill-white"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center" data-aos="fade-up" data-aos-duration="800">
+                <div class="inline-block px-3 py-1 rounded-full bg-secondary-100 text-secondary-800 text-sm font-semibold mb-4">
+                    Tiếng nói từ cộng đồng
+                </div>
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Nhận xét từ người dùng
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
+                    Những chia sẻ từ tình nguyện viên và tổ chức đã sử dụng nền tảng của chúng tôi.
+                </p>
+            </div>
+
+            <div class="mt-12">
+                <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2">
+                    <div class="bg-gray-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="h-14 w-14 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 text-xl font-bold">
+                                    NT
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <div class="text-lg font-bold text-gray-900">Nguyễn Thảo</div>
+                                <div class="text-sm text-gray-500">Tình nguyện viên</div>
+                                <div class="mt-1 flex items-center">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-gray-600">
+                            <p class="text-lg italic">
+                                "Cảm ơn vì một nền tảng tuyệt vời! Việc tìm kiếm chương trình tình nguyện trở nên dễ dàng hơn bao giờ hết. Các bộ lọc rất tiện lợi và tôi đã tìm được một dự án thật phù hợp với mình."
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="h-14 w-14 rounded-full bg-secondary-100 flex items-center justify-center text-secondary-600 text-xl font-bold">
+                                    HT
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <div class="text-lg font-bold text-gray-900">Tổ chức Phi Chính Phủ Hướng Thiện</div>
+                                <div class="text-sm text-gray-500">Tổ chức</div>
+                                <div class="mt-1 flex items-center">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-gray-600">
+                            <p class="text-lg italic">
+                                "Chúng tôi đã tuyển được rất nhiều tình nguyện viên xuất sắc thông qua nền tảng này. Các thông tin rất rõ ràng và việc kết nối với các tình nguyện viên là rất hiệu quả."
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="h-14 w-14 rounded-full bg-earth-100 flex items-center justify-center text-earth-600 text-xl font-bold">
+                                    CD
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <div class="text-lg font-bold text-gray-900">Tổ chức Tình Nguyện Vì Cộng Đồng</div>
+                                <div class="text-sm text-gray-500">Tổ chức</div>
+                                <div class="mt-1 flex items-center">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-gray-600">
+                            <p class="text-lg italic">
+                                "Nền tảng này giúp chúng tôi tiếp cận đúng đối tượng tình nguyện viên cho các chương trình của mình, đồng thời đảm bảo rằng các ứng viên đều đáp ứng được các tiêu chí đã đặt ra."
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="h-14 w-14 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 text-xl font-bold">
+                                    PL
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <div class="text-lg font-bold text-gray-900">Phạm Lan</div>
+                                <div class="text-sm text-gray-500">Tình nguyện viên</div>
+                                <div class="mt-1 flex items-center">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-gray-600">
+                            <p class="text-lg italic">
+                                "Cộng đồng ở đây thật tuyệt vời! Tôi đã kết nối được với nhiều người cùng chí hướng và nhận được nhiều lời khuyên hữu ích."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-gray-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 max-w-2xl mx-auto" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <div class="h-14 w-14 rounded-full bg-secondary-100 flex items-center justify-center text-secondary-600 text-xl font-bold">
+                                TM
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <div class="text-lg font-bold text-gray-900">Trần Minh</div>
+                            <div class="text-sm text-gray-500">Tình nguyện viên</div>
+                            <div class="mt-1 flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 text-gray-600">
+                        <p class="text-lg italic">
+                            "Tôi rất thích tính năng lưu chương trình yêu thích. Nó giúp tôi theo dõi và không bỏ lỡ bất kỳ cơ hội nào. Thực sự là một công cụ hữu ích!"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="py-20 bg-gradient-to-r from-primary-600 to-primary-700 relative">
+        <!-- Decorative Elements -->
+        <div class="absolute inset-0 bg-texture opacity-10"></div>
+        <div class="absolute top-0 left-0 w-full overflow-hidden leading-none transform rotate-180">
+            <svg class="relative block w-full h-12 sm:h-16" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="fill-white"></path>
+            </svg>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center" data-aos="fade-up" data-aos-duration="800">
+                <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                    Từng bước chân – Một ước mơ được thắp sáng
+                </h2>
+                <p class="mt-6 max-w-3xl text-xl text-white mx-auto opacity-90">
+                    Chúng tôi cam kết mang đến sự minh bạch, hỗ trợ xuyên suốt và hoàn toàn không thu phí. Định hướng của chúng tôi là phát triển nền tảng lâu dài, trở thành cầu nối tin cậy giữa tình nguyện viên và các tổ chức.
+                </p>
+                <div class="mt-10 flex justify-center flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+                    <a href="#" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-primary-700 bg-white hover:bg-gray-50 transition duration-300 ease-in-out shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                        <i class="fas fa-search mr-2"></i> Khám phá ngay
+                    </a>
+                    <a href="#" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-secondary-600 hover:bg-secondary-700 transition duration-300 ease-in-out shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                        <i class="fas fa-bell mr-2"></i> Đăng ký nhận thông tin
+                    </a>
+                    <a href="#" class="inline-flex items-center justify-center px-6 py-3 border border-white text-base font-medium rounded-full text-white hover:bg-white hover:text-primary-700 transition duration-300 ease-in-out shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                        <i class="fas fa-user-plus mr-2"></i> Đăng tìm TNV
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Wave Separator -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+            <svg class="relative block w-full h-12 sm:h-16" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-white"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center" data-aos="fade-up" data-aos-duration="800">
+                <div class="inline-block px-3 py-1 rounded-full bg-secondary-100 text-secondary-800 text-sm font-semibold mb-4">
+                    Chia sẻ khoảnh khắc
+                </div>
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Cộng đồng tình nguyện viên
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-600 mx-auto">
+                    Nơi để mọi người chia sẻ về các khoảnh khắc ý nghĩa khi đi tình nguyện.
+                </p>
+            </div>
+
+            <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                    <div class="relative">
+                        <img class="w-full h-56 object-cover" src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Khoảnh khắc tình nguyện 1">
+                        <div class="absolute top-4 right-4 bg-white rounded-full px-3 py-1 text-xs font-medium text-primary-600 shadow-md">
+                            15/04/2025
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900">Hành trình gieo chữ tại Hà Giang</h3>
+                        <p class="mt-3 text-base text-gray-600">
+                            Chia sẻ về những ngày dạy học tại vùng cao Hà Giang, những kỷ niệm đáng nhớ và bài học quý giá từ trẻ em nơi đây.
+                        </p>
+                        <div class="mt-6 flex items-center">
+                            <div class="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 text-sm font-bold">
+                                NVA
+                            </div>
+                            <span class="ml-3 text-sm font-medium text-gray-700">Nguyễn Văn A</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                    <div class="relative">
+                        <img class="w-full h-56 object-cover" src="https://images.unsplash.com/photo-1527891751199-7225231a68dd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Khoảnh khắc tình nguyện 2">
+                        <div class="absolute top-4 right-4 bg-white rounded-full px-3 py-1 text-xs font-medium text-primary-600 shadow-md">
+                            10/04/2025
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900">Mùa hè xanh tại Cao Bằng</h3>
+                        <p class="mt-3 text-base text-gray-600">
+                            Những trải nghiệm đáng nhớ khi tham gia chương trình tình nguyện mùa hè, từ dạy học đến giao lưu văn hóa với đồng bào dân tộc.
+                        </p>
+                        <div class="mt-6 flex items-center">
+                            <div class="h-10 w-10 rounded-full bg-secondary-100 flex items-center justify-center text-secondary-600 text-sm font-bold">
+                                TTB
+                            </div>
+                            <span class="ml-3 text-sm font-medium text-gray-700">Trần Thị B</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                    <div class="relative">
+                        <img class="w-full h-56 object-cover" src="https://images.unsplash.com/photo-1544476915-ed1370594142?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Khoảnh khắc tình nguyện 3">
+                        <div class="absolute top-4 right-4 bg-white rounded-full px-3 py-1 text-xs font-medium text-primary-600 shadow-md">
+                            05/04/2025
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900">Hành trình Sơn La - Điện Biên</h3>
+                        <p class="mt-3 text-base text-gray-600">
+                            Chia sẻ về chuyến đi tình nguyện kéo dài 2 tuần qua các bản làng vùng cao, những khó khăn và niềm vui khi được đồng hành cùng trẻ em.
+                        </p>
+                        <div class="mt-6 flex items-center">
+                            <div class="h-10 w-10 rounded-full bg-earth-100 flex items-center justify-center text-earth-600 text-sm font-bold">
+                                LVC
+                            </div>
+                            <span class="ml-3 text-sm font-medium text-gray-700">Lê Văn C</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 text-center" data-aos="fade-up" data-aos-duration="800">
+                <a href="#" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-primary-600 hover:bg-primary-700 transition duration-300 ease-in-out shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                    <i class="fas fa-plus mr-2"></i> Xem thêm chia sẻ
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white relative">
+        <div class="absolute top-0 left-0 w-full overflow-hidden leading-none transform rotate-180">
+            <svg class="relative block w-full h-12 sm:h-16" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-white"></path>
+            </svg>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="h-12 w-12 rounded-full bg-primary-500 flex items-center justify-center text-white font-bold text-lg mr-3">
+                            VNM
+                        </div>
+                        <h3 class="text-xl font-bold">Vì một ngày mai</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6">
+                        Nền tảng kết nối tình nguyện viên và các hành trình gieo chữ vùng cao.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="h-10 w-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-primary-600 hover:text-white transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="h-10 w-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-primary-600 hover:text-white transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="h-10 w-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-primary-600 hover:text-white transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="h-10 w-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-primary-600 hover:text-white transition duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-6 border-b border-gray-700 pb-2">Liên kết</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-500"></i> Trang chủ</a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-500"></i> Giới thiệu</a></li>
+                        <li><a href="#features" class="text-gray-300 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-500"></i> Tính năng</a></li>
+                        <li><a href="#community" class="text-gray-300 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-500"></i> Cộng đồng</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-500"></i> Chính sách bảo mật</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-500"></i> Điều khoản sử dụng</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-6 border-b border-gray-700 pb-2">Liên hệ</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-primary-500"></i>
+                            <span>Số 2 Phạm Văn Đồng, Cầu Giấy, Hà Nội</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone mt-1 mr-3 text-primary-500"></i>
+                            <span>0965516581</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3 text-primary-500"></i>
+                            <span>phuonganh47t@gmail.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fab fa-facebook mt-1 mr-3 text-primary-500"></i>
+                            <span>Vì Một Ngày Mai</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fab fa-instagram mt-1 mr-3 text-primary-500"></i>
+                            <span>@ViMotNgayMai2025</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-6 border-b border-gray-700 pb-2">Đăng ký nhận tin</h3>
+                    <p class="text-gray-300 mb-4">
+                        Nhận thông tin mới nhất về các cơ hội tình nguyện.
+                    </p>
+                    <form class="flex flex-col space-y-4">
+                        <input type="email" placeholder="Email của bạn" class="px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-800 bg-gray-100">
+                        <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-3 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+                            <i class="fas fa-paper-plane mr-2"></i> Đăng ký
+                        </button>
+                    </form>
+                    <button class="mt-6 text-gray-300 hover:text-white flex items-center group">
+                        <i class="fas fa-comment-dots mr-2 text-primary-500 group-hover:text-primary-400 transition duration-300"></i>
+                        <span>Góp ý xây dựng nền tảng</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
+                <p>&copy; 2025 Vì một ngày mai. Tất cả các quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 h-12 w-12 rounded-full bg-primary-600 text-white shadow-lg flex items-center justify-center transform scale-0 hover:bg-primary-700 transition-all duration-300 z-50">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                once: true,
+                disable: 'mobile'
+            });
+            
+            // Hide preloader when page is loaded
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 800);
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg', 'bg-white/95', 'backdrop-blur-sm');
+                navbar.classList.remove('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-lg', 'bg-white/95', 'backdrop-blur-sm');
+                navbar.classList.add('shadow-md');
+            }
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.replace('scale-0', 'scale-100');
+            } else {
+                backToTopButton.classList.replace('scale-100', 'scale-0');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Adjust for fixed header
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Simple form validation for newsletter signup
+        const newsletterForm = document.querySelector('footer form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const emailInput = this.querySelector('input[type="email"]');
+                if (!emailInput.value || !emailInput.value.includes('@')) {
+                    alert('Vui lòng nhập địa chỉ email hợp lệ!');
+                    return;
+                }
+                alert('Cảm ơn bạn đã đăng ký nhận thông tin!');
+                emailInput.value = '';
+            });
+        }
+
+        // Add floating animation
+        document.styleSheets[0].insertRule(`
+            @keyframes float {
+                0% { transform: translateY(0px) rotate(3deg); }
+                50% { transform: translateY(-10px) rotate(3deg); }
+                100% { transform: translateY(0px) rotate(3deg); }
+            }
+        `, 0);
+
+        document.styleSheets[0].insertRule(`
+            @keyframes float-delayed {
+                0% { transform: translateY(0px) rotate(-3deg); }
+                50% { transform: translateY(-10px) rotate(-3deg); }
+                100% { transform: translateY(0px) rotate(-3deg); }
+            }
+        `, 0);
+
+        document.styleSheets[0].insertRule(`
+            .animate-float {
+                animation: float 4s ease-in-out infinite;
+            }
+        `, 0);
+
+        document.styleSheets[0].insertRule(`
+            .animate-float-delayed {
+                animation: float-delayed 4s ease-in-out infinite;
+                animation-delay: 2s;
+            }
+        `, 0);
+    </script>
+</body>
+</html>
